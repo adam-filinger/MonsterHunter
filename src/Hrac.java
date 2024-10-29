@@ -8,7 +8,12 @@ public class Hrac {
     private String zapisnik;
     private Lokace umisteni;
 
+    public Lokace getUmisteni() {
+        return umisteni;
+    }
+
     public void jdi(Lokace loc){
+        umisteni = loc;
     }
 
     public void promluv(Postava npc){
@@ -34,6 +39,10 @@ public class Hrac {
 
     public void mapa(){
 
+    }
+
+    public void promluv(){
+        System.out.println("Hello World");
     }
 
 

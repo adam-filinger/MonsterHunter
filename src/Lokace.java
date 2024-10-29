@@ -6,4 +6,11 @@ public class Lokace {
 
     private Set<Lokace> obsahuje;
 
+    public Lokace(String nazev) {
+        this.nazev = nazev;
+    }
+
+    public String getNazev() {
+        return nazev;
+    }
 }
