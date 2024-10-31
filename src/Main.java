@@ -1,18 +1,32 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        ObjectMapper mapper = new ObjectMapper();
         String command;
-        List<String> commands = new ArrayList<>();
-        commands.add("promluv");
-        commands.add("jdi");
         Hrac hrac = new Hrac();
-        Lokace rivald = new Lokace("Rivald");
-        List<Lokace> vsechnyLokace = new ArrayList<>();
-        vsechnyLokace.add(rivald);
+        List<Lokace> vsechnyLokace = new ArrayList<>(){{
+        }};
+
+        try {
+            // Read the JSON file and map it to a list of Location objects
+            vsechnyLokace = mapper.readValue(new File("locations.json"),
+                    mapper.getTypeFactory().constructCollectionType(List.class, Lokace.class));
+
+            // Print the hierarchy to verify loading
+            for (Lokace loc : vsechnyLokace) {
+                loc.vypisSeznamPodLokaci(" ");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         while(true){
 
@@ -29,11 +43,10 @@ public class Main {
                         System.out.println(hrac.getUmisteni().getNazev());
                     }
                 }
+            } else{
+                System.out.println("Zadán neplatný příkaz");
             }
 
-
-
-            System.out.println("Command entered: " + command);
         }
 
 

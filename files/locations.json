@@ -1,0 +1,69 @@
+[
+  {
+    "nazev": "Rivald",
+    "podLokace": [
+      {
+        "nazev": "Náměstí",
+        "podLokace": []
+      },
+      {
+        "nazev": "Hostinec",
+        "podLokace": [
+          {
+            "nazev": "Bar",
+            "podLokace": []
+          },
+          {
+            "nazev": "Horní pokoj",
+            "podLokace": []
+          }
+        ]
+      },
+      {
+        "nazev": "Radnice",
+        "podLokace": [
+          {
+            "nazev": "Pracovna",
+            "podLokace": []
+          },
+          {
+            "nazev": "Pokoj služky",
+            "podLokace": []
+          }
+        ]
+      },
+      {
+        "nazev": "Kovárna",
+        "podLokace": []
+      }
+    ]
+  },
+  {
+    "nazev": "Les",
+    "podLokace": [{
+      "nazev": "Jeskyně",
+      "podLokace": []
+    }]
+  },
+  {
+    "nazev": "Řeka",
+    "podLokace": []
+  },
+  {
+    "nazev": "Pole",
+    "podLokace": []
+  },
+  {
+    "nazev": "Opuštěný zámek",
+    "podLokace": [
+      {
+        "nazev": "Chodba",
+        "podLokace": []
+      },
+      {
+        "nazev": "Velký sál",
+        "podLokace": []
+      }
+    ]
+  }
+]
