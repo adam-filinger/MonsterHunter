@@ -12,6 +12,10 @@ public class Hrac {
         return umisteni;
     }
 
+    public void setUmisteni(Lokace umisteni) {
+        this.umisteni = umisteni;
+    }
+
     public void jdi(Lokace loc){
         umisteni = loc;
     }
