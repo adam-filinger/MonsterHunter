@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Main {
 
+    private static Hrac hrac = new Hrac();
     private static boolean hraSpustena = true;
     private static List<Lokace> dostupneLokace = new ArrayList<>();
 
@@ -13,7 +14,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         ObjectMapper mapper = new ObjectMapper();
         String command;
-        Hrac hrac = new Hrac();
+
 
         List<Lokace> vsechnyLokace = new ArrayList<>(){{
         }};
@@ -33,7 +34,6 @@ public class Main {
         }
 
         while(hraSpustena) {
-            dostupneLokace.clear();
             if(hrac.getUmisteni().getNadLokace() == null){
                 dostupneLokace = hrac.getUmisteni().getpodLokace();
                 for(Lokace loc : vsechnyLokace){
@@ -70,7 +70,17 @@ public class Main {
             }
 
         }
+        dostupneLokace.clear();
 
 
     }
+
+    public static void nastavDostupneLokace(){
+        Lokace momentalniLokace = hrac.getUmisteni();
+
+        if(momentalniLokace.getNadLokace() == null){
+            
+        }
+    }
+
 }

@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/jackson-core-2.18.1.jar!/" />
+          <root url="jar://C:/jars/jackson/jackson-annotations-2.18.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/jackson-databind-2.18.1.jar!/" />
+          <root url="jar://C:/jars/jackson/jackson-core-2.18.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -28,7 +28,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/jackson-annotations-2.18.1.jar!/" />
+          <root url="jar://C:/jars/jackson/jackson-databind-2.18.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
