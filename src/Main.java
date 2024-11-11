@@ -23,6 +23,9 @@ public class Main {
 
         for(Lokace loc : vsechnyLokace) {
             loc.nastavNadLokaci();
+            for(Lokace loc2 : loc.getpodLokace()){
+                loc2.nastavNadLokaci();
+            }
         }
 
         nastavDostupneLokace();
@@ -39,8 +42,9 @@ public class Main {
                 hrac.promluv();
             } else if(command.contains("jdi")){
                 String presunuti = command.substring(4);
-                prikazy.jdi(hrac, presunuti, dostupneLokace);
-                nastavDostupneLokace();
+                if(prikazy.jdi(hrac, presunuti, dostupneLokace)){
+                    nastavDostupneLokace();
+                }
             } else if (command.equals("konec")) {
                 hraSpustena = false;
             } else{
@@ -67,6 +71,7 @@ public class Main {
         dostupneLokace.clear();
 
         if(momentalniLokace.getNadLokace() == null){
+            System.out.println("/");
             for(Lokace lokace : vsechnyLokace){
                 if(!lokace.equals(momentalniLokace)){
                     dostupneLokace.add(lokace);
@@ -76,8 +81,10 @@ public class Main {
                 dostupneLokace.add(podLokace);
             }
         } else if(momentalniLokace.getpodLokace().isEmpty()){
+            System.out.println("-");
             dostupneLokace.add(momentalniLokace.getNadLokace());
         } else {
+            System.out.println("+");
             dostupneLokace.add(momentalniLokace.getNadLokace());
             for(Lokace loc : momentalniLokace.getpodLokace()){
                 dostupneLokace.add(loc);
