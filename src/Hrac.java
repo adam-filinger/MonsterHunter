@@ -8,6 +8,7 @@ public class Hrac {
     private String zapisnik;
     private Lokace umisteni;
 
+
     public Lokace getUmisteni() {
         return umisteni;
     }

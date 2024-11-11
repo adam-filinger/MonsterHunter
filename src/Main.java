@@ -8,45 +8,27 @@ public class Main {
 
     private static Hrac hrac = new Hrac();
     private static boolean hraSpustena = true;
+    private static List<Lokace> vsechnyLokace = new ArrayList<>();
     private static List<Lokace> dostupneLokace = new ArrayList<>();
+    private static Prikazy prikazy = new Prikazy();
+
+    private static Scanner scanner = new Scanner(System.in);
+    private static ObjectMapper mapper = new ObjectMapper();
+    private static String command;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        ObjectMapper mapper = new ObjectMapper();
-        String command;
 
-
-        List<Lokace> vsechnyLokace = new ArrayList<>(){{
-        }};
-
-        try {
-            // Read the JSON file and map it to a list of Location objects
-            vsechnyLokace = mapper.readValue(new File("files/locations.json"),
-                    mapper.getTypeFactory().constructCollectionType(List.class, Lokace.class));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        nactiLokace("files/locations.json");
         hrac.setUmisteni(vsechnyLokace.get(0));
+
         for(Lokace loc : vsechnyLokace) {
             loc.nastavNadLokaci();
         }
 
-        while(hraSpustena) {
-            if(hrac.getUmisteni().getNadLokace() == null){
-                dostupneLokace = hrac.getUmisteni().getpodLokace();
-                for(Lokace loc : vsechnyLokace){
-                    if(!loc.equals(hrac.getUmisteni())){
-                        dostupneLokace.add(loc);
-                    }
-                }
-            }else if(hrac.getUmisteni().getpodLokace().isEmpty()){
-                dostupneLokace.add(hrac.getUmisteni().getNadLokace());
-            }else{
-                dostupneLokace = hrac.getUmisteni().getpodLokace();
-                dostupneLokace.add(hrac.getUmisteni().getNadLokace());
-            }
+        nastavDostupneLokace();
+
+        while(hraSpustena){
+
             for(Lokace lokace : dostupneLokace) {
                 System.out.println(lokace.getNazev());
             }
@@ -57,12 +39,8 @@ public class Main {
                 hrac.promluv();
             } else if(command.contains("jdi")){
                 String presunuti = command.substring(4);
-                for(Lokace loc : dostupneLokace){
-                    if(loc.getNazev().contains(presunuti)){
-                        hrac.jdi(loc);
-                        System.out.println("Nacházíš se v: " + hrac.getUmisteni().getNazev());
-                    }
-                }
+                prikazy.jdi(hrac, presunuti, dostupneLokace);
+                nastavDostupneLokace();
             } else if (command.equals("konec")) {
                 hraSpustena = false;
             } else{
@@ -70,16 +48,40 @@ public class Main {
             }
 
         }
-        dostupneLokace.clear();
 
+    }
 
+    public static void nactiLokace(String path){
+        try {
+            // Read the JSON file and map it to a list of Location objects
+            vsechnyLokace = mapper.readValue(new File(path),
+                    mapper.getTypeFactory().constructCollectionType(List.class, Lokace.class));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void nastavDostupneLokace(){
         Lokace momentalniLokace = hrac.getUmisteni();
+        dostupneLokace.clear();
 
         if(momentalniLokace.getNadLokace() == null){
-            
+            for(Lokace lokace : vsechnyLokace){
+                if(!lokace.equals(momentalniLokace)){
+                    dostupneLokace.add(lokace);
+                }
+            }
+            for(Lokace podLokace : momentalniLokace.getpodLokace()){
+                dostupneLokace.add(podLokace);
+            }
+        } else if(momentalniLokace.getpodLokace().isEmpty()){
+            dostupneLokace.add(momentalniLokace.getNadLokace());
+        } else {
+            dostupneLokace.add(momentalniLokace.getNadLokace());
+            for(Lokace loc : momentalniLokace.getpodLokace()){
+                dostupneLokace.add(loc);
+            }
         }
     }
 
